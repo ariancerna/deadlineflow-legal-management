@@ -1,0 +1,25 @@
+# Build output and local dependencies
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/*.tsbuildinfo
+backend/target/
+
+# Local configuration and databases
+.env
+.env.*
+!.env.example
+*.mv.db
+*.trace.db
+
+# Generated or local-only artifacts
+Informe_APF1_Deadlineflow.docx
+/package-lock.json
+tools/
+
+# Editor and operating system files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
