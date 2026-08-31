@@ -1,0 +1,49 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: deadlineflow-backend
+
+  # --- Perfil por defecto: H2 en memoria para desarrollo/pruebas ---
+  datasource:
+    url: jdbc:h2:mem:deadlineflow;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+deadlineflow:
+  jwt:
+    secret: "CAMBIAR_ESTE_SECRETO_EN_PRODUCCION_MINIMO_256_BITS_1234567890"
+    expiration-ms: 3600000 # 1 hora
+  balance-carga:
+    umbral-tareas-activas: 8
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/deadlineflow}
+    username: ${DB_USER:deadlineflow}
+    password: ${DB_PASSWORD:deadlineflow}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
